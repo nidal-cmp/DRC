@@ -3,7 +3,7 @@
 
 > LABS0010 · Problem 4  
 > Phase 03 — Build the Base MVP  
-> Solution A: QR + WhatsApp + PWA Stack
+> Solution : QR + WhatsApp + PWA Stack
 
 ---
 
@@ -13,7 +13,7 @@ Smart Restaurant Ordering System is a mobile-first digital ordering platform des
 
 Customers can scan a QR code placed on a restaurant table or counter, browse the menu through a Progressive Web App (PWA), place orders, complete payments using Razorpay, and instantly receive WhatsApp order confirmations.
 
-The system is designed as a real end-to-end MVP with scalable architecture and modular components. :contentReference[oaicite:0]{index=0}
+The system is designed as a real end-to-end MVP with scalable architecture and modular components. 
 
 ---
 
