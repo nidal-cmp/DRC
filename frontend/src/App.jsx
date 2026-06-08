@@ -270,10 +270,44 @@ export default function App() {
       if (!res.ok) throw new Error("Server error")
 
       const data = await res.json()
-      alert(`Order placed! Order ID: ${data.order_id}`)
-      setCart({})
-      setShowCheckout(false)
-      setForm({ name: "", phone: "" })
+
+const orderResponse = await fetch("/api/payment/create-order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    amount: totalAmount
+  })
+})
+
+const orderData = await orderResponse.json()
+
+const options = {
+  key: "YOUR_RAZORPAY_KEY_ID",
+  amount: orderData.order.amount,
+  currency: orderData.order.currency,
+  order_id: orderData.order.id,
+  name: "Order Direct",
+  description: "Food Order",
+  handler: async function (response) {
+    alert("Payment Successful!")
+
+    setCart({})
+    setShowCheckout(false)
+    setForm({ name: "", phone: "" })
+  },
+  prefill: {
+    name: form.name,
+    contact: form.phone
+  },
+  theme: {
+    color: "#0d9488"
+  }
+}
+
+const razorpay = new window.Razorpay(options)
+razorpay.open()
 
     } catch (err) {
       setError("Could not place order. Please try again.")
