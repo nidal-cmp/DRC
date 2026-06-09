@@ -1,0 +1,82 @@
+[
+  {
+    "id": "item_001",
+    "name": "Chicken Biryani",
+    "category": "Main Course",
+    "description": "Aromatic basmati rice cooked with chicken and spices",
+    "price": 180,
+    "is_available": true
+  },
+  {
+    "id": "item_002",
+    "name": "Butter Chicken",
+    "category": "Main Course",
+    "description": "Creamy tomato-based chicken curry",
+    "price": 220,
+    "is_available": true
+  },
+  {
+    "id": "item_003",
+    "name": "Paneer Butter Masala",
+    "category": "Main Course",
+    "description": "Paneer cubes in rich buttery gravy",
+    "price": 190,
+    "is_available": true
+  },
+  {
+    "id": "item_004",
+    "name": "Veg Fried Rice",
+    "category": "Main Course",
+    "description": "Stir-fried rice with vegetables",
+    "price": 140,
+    "is_available": true
+  },
+  {
+    "id": "item_005",
+    "name": "Masala Dosa",
+    "category": "Breakfast",
+    "description": "Rice crepe filled with spiced potato",
+    "price": 90,
+    "is_available": true
+  },
+  {
+    "id": "item_006",
+    "name": "Idli Sambar",
+    "category": "Breakfast",
+    "description": "Steamed rice cakes served with sambar",
+    "price": 70,
+    "is_available": true
+  },
+  {
+    "id": "item_007",
+    "name": "Poori Bhaji",
+    "category": "Breakfast",
+    "description": "Deep-fried bread served with potato curry",
+    "price": 80,
+    "is_available": true
+  },
+  {
+    "id": "item_008",
+    "name": "Gulab Jamun",
+    "category": "Desserts",
+    "description": "Soft milk-solid dumplings in sugar syrup",
+    "price": 60,
+    "is_available": true
+  },
+  {
+    "id": "item_009",
+    "name": "Chocolate Brownie",
+    "category": "Desserts",
+    "description": "Rich chocolate brownie served warm",
+    "price": 120,
+    "is_available": true
+  },
+  {
+    "id": "item_010",
+    "name": "Ice Cream Sundae",
+    "category": "Desserts",
+    "description": "Vanilla ice cream with chocolate topping",
+    "price": 100,
+    "is_available": true
+  }
+]
