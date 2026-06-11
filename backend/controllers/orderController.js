@@ -1,17 +1,55 @@
-// Return all orders
+const db = require("../utils/db");
+
+// Get all orders
 const getOrders = (req, res) => {
-    res.json([]);
+  db.query(
+    "SELECT * FROM orders",
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({
+          error: err.message
+        });
+      }
+
+      res.json(results);
+    }
+  );
 };
 
-// Create a new order
+// Create new order
 const createOrder = (req, res) => {
-    res.json({
+
+  const {
+    customer_name,
+    product_name,
+    quantity
+  } = req.body;
+
+  const sql =
+    `INSERT INTO orders
+     (customer_name, product_name, quantity)
+     VALUES (?, ?, ?)`;
+
+  db.query(
+    sql,
+    [customer_name, product_name, quantity],
+    (err, result) => {
+
+      if (err) {
+        return res.status(500).json({
+          error: err.message
+        });
+      }
+
+      res.json({
         success: true,
-        message: "Order created successfully"
-    });
+        order_id: result.insertId
+      });
+    }
+  );
 };
 
 module.exports = {
-    getOrders,
-    createOrder
+  getOrders,
+  createOrder
 };
