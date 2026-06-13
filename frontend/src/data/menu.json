@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Chicken Biryani",
+    "category": "Main Course",
+    "description": "Aromatic basmati rice cooked with tender chicken and spices.",
+    "price": 250,
+    "type": "nonveg",
+    "image": "/images/chickenbiriyani.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Paneer Butter Masala",
+    "category": "Main Course",
+    "description": "Soft paneer cubes in a rich creamy tomato gravy.",
+    "price": 220,
+    "type": "veg",
+    "image": "/images/paneerbuttermasala.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Chicken 65",
+    "category": "Starters",
+    "description": "Spicy deep-fried chicken bites with South Indian flavors.",
+    "price": 180,
+    "type": "nonveg",
+    "image": "/images/chicken65.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Paneer Tikka",
+    "category": "Starters",
+    "description": "Grilled paneer cubes marinated with yogurt and spices.",
+    "price": 170,
+    "type": "veg",
+    "image": "/images/paneertikka.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Masala Chai",
+    "category": "Drinks",
+    "description": "Traditional Indian spiced tea with milk.",
+    "price": 40,
+    "type": "veg",
+    "image": "/images/masalachai.jpg"
+  }
+]
