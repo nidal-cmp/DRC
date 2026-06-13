@@ -27,11 +27,21 @@ export default function Login() {
 
   return (
 
-    <div className="page">
+    <div className="login-page">
 
-      <h1>Login</h1>
+      <div className="login-card">
 
-      <div className="card-box">
+        <h1>
+
+          Welcome Back 👋
+
+        </h1>
+
+        <p>
+
+          Sign in to continue ordering
+
+        </p>
 
         <input
           className="auth-input"
@@ -53,7 +63,7 @@ export default function Login() {
 
         <input
           className="auth-input"
-          placeholder="Phone"
+          placeholder="Phone Number"
           value={phone}
           onChange={(e)=>
             setPhone(e.target.value)
@@ -64,7 +74,9 @@ export default function Login() {
           className="checkout-btn"
           onClick={handleLogin}
         >
+
           Login
+
         </button>
 
       </div>

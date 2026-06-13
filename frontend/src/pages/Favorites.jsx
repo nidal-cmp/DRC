@@ -7,30 +7,54 @@ export default function Favorites() {
 
   return (
 
-    <div className="page">
+    <div className="favorites-page">
 
-      <h1>Favorites</h1>
+      <h1>
 
-      {favorites.length === 0 ? (
+        Your Favorites ❤️
 
-        <p>No favourite dishes yet.</p>
+      </h1>
 
-      ) : (
+      {
 
-        <div className="menu-grid">
+        favorites.length === 0 ?
 
-          {favorites.map((item) => (
+        <div className="empty-state">
 
-            <MenuCard
-              key={item.id}
-              item={item}
-            />
+          <h2>
 
-          ))}
+            No favourite dishes yet ❤️
+
+          </h2>
+
+          <p>
+
+            Tap the heart icon on menu items to save them.
+
+          </p>
 
         </div>
 
-      )}
+        :
+
+        <div className="favorites-grid">
+
+          {
+
+            favorites.map((item)=>(
+
+              <MenuCard
+                key={item.id}
+                item={item}
+              />
+
+            ))
+
+          }
+
+        </div>
+
+      }
 
     </div>
 

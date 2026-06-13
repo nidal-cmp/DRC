@@ -2,23 +2,75 @@ export default function OrderHistory() {
 
   return (
 
-    <div className="page">
+    <div className="order-history-page">
 
-      <h1>Order History</h1>
+      <h1>
 
-      <div className="card-box">
+        Order History
 
-        <div className="order-card">
+      </h1>
 
-          <h3>#1025</h3>
+      <div className="order-card">
 
-          <p>Chicken Biryani × 2</p>
+        <div className="order-top">
 
-          <p>₹360</p>
+          <h3>
 
-          <p>Status: Delivered</p>
+            #1025
+
+          </h3>
+
+          <span className="status delivered">
+
+            Delivered
+
+          </span>
 
         </div>
+
+        <p>
+
+          Chicken Biryani × 2
+
+        </p>
+
+        <h2>
+
+          ₹360
+
+        </h2>
+
+      </div>
+
+      <div className="order-card">
+
+        <div className="order-top">
+
+          <h3>
+
+            #1024
+
+          </h3>
+
+          <span className="status preparing">
+
+            Preparing
+
+          </span>
+
+        </div>
+
+        <p>
+
+          Paneer Butter Masala × 1
+
+        </p>
+
+        <h2>
+
+          ₹220
+
+        </h2>
 
       </div>
 
