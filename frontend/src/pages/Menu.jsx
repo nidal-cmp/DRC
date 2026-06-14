@@ -7,7 +7,7 @@ import CartSidebar from "../components/CartSideBar";
 import SearchBar from "../components/SearchBar";
 import VegToggle from "../components/VegToggle";
 import MenuCard from "../components/MenuCard";
-import CartSidebar from "../components/CartSidebar";
+
 
 export default function Menu() {
 
