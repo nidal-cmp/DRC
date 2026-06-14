@@ -4,6 +4,7 @@ import menu from "../data/menu.json";
 
 import Navbar from "../components/Navbar";
 import CartSidebar from "../components/CartSideBar";
+import CategorySidebar from "../components/CategorySidebar";
 import SearchBar from "../components/SearchBar";
 import VegToggle from "../components/VegToggle";
 import MenuCard from "../components/MenuCard";
