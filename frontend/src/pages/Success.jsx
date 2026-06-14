@@ -26,7 +26,7 @@ export default function Checkout() {
     try {
 
       const res = await fetch(
-        "http://localhost:5000/api/order",
+        "http://drc.up.railway.app/api/order",
         {
           method: "POST",
 
