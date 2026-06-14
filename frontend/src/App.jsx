@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
 import Favorites from "./pages/Favorites";
 import OrderHistory from "./pages/OrderHistory";
+import Success from "./pages/Success";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/success" element={<Success />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />

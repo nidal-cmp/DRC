@@ -3,7 +3,7 @@ import { useState } from "react";
 import menu from "../data/menu.json";
 
 import Navbar from "../components/Navbar";
-import CartSidebar from "../components/CartSideBar";
+import CartSidebar from "../components/CartSidebar";
 import CategorySidebar from "../components/CategorySidebar";
 import SearchBar from "../components/SearchBar";
 import VegToggle from "../components/VegToggle";

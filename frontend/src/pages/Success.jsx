@@ -1,112 +1,40 @@
-import { useState } from "react";
-import { useCart } from "../context/CartContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Checkout() {
-
-  const { cart } = useCart();
+export default function Success() {
+  const location = useLocation();
   const navigate = useNavigate();
-
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [instructions, setInstructions] = useState("");
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const placeOrder = async () => {
-
-    if (!name || !phone) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    try {
-
-      const res = await fetch(
-        "https://drc.up.railway.app/api/order",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            customer_name: name,
-            phone,
-            items: cart,
-            total_amount: total,
-            payment_status: "pending",
-            order_status: "received",
-            instructions
-          }),
-        }
-      );
-
-      const data = await res.json();
-
-      navigate("/success", {
-        state: {
-          orderId: data.order_id,
-          total,
-          name
-        }
-      });
-
-    } catch (err) {
-
-      console.log(err);
-
-      alert("Server Error");
-
-    }
-
-  };
+  const { orderId, total, name } = location.state || {};
 
   return (
+    <div className="receipt-container">
+      <div className="receipt-card">
+        <div className="success-icon">🎉</div>
+        <h1>Order Placed Successfully!</h1>
+        <p className="thank-you">Thank you for your order, {name || "Customer"}!</p>
+        
+        {orderId ? (
+          <div className="receipt-details">
+            <div className="detail-row">
+              <span>Order ID</span>
+              <strong>#{orderId}</strong>
+            </div>
+            <div className="detail-row">
+              <span>Total Amount</span>
+              <strong>₹{total}</strong>
+            </div>
+          </div>
+        ) : (
+          <p className="no-details">No active order details found.</p>
+        )}
 
-    <div className="checkout-page">
+        <p className="whatsapp-note">
+          A confirmation message has been sent to your WhatsApp number.
+        </p>
 
-      <h1>Checkout</h1>
-
-      <input
-        placeholder="Your Name"
-        value={name}
-        onChange={(e) =>
-          setName(e.target.value)
-        }
-      />
-
-      <input
-        placeholder="Phone Number"
-        value={phone}
-        onChange={(e) =>
-          setPhone(e.target.value)
-        }
-      />
-
-      <textarea
-        placeholder="Special Instructions"
-        value={instructions}
-        onChange={(e) =>
-          setInstructions(e.target.value)
-        }
-      />
-
-      <h2>Total: ₹{total}</h2>
-
-      <button
-        className="checkout-btn"
-        onClick={placeOrder}
-      >
-        Place Order
-      </button>
-
+        <button className="home-btn" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+      </div>
     </div>
-
   );
-
 }
