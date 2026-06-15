@@ -41,10 +41,7 @@ function App() {
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/orders" element={<OrderHistory />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
-  
-
-<Route
+        <Route
   path="/admin"
   element={
     <AdminProtectedRoute>
