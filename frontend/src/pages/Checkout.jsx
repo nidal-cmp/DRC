@@ -34,51 +34,55 @@ export default function Checkout() {
     0
   );
 
-  const placeOrder = async () => {
+const placeOrder = async () => {
+  try {
 
-    setLoading(true);
+    const orderRes = await fetch(
+      "https://drc-production-c919.up.railway.app/api/create-order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: total,
+        }),
+      }
+    );
 
-    try {
+    const order = await orderRes.json();
 
-      const res = await fetch(
-        "https://drc-production-c919.up.railway.app/api/order",
-        {
-          method: "POST",
+    const options = {
+      key: "rzp_test_SzrPUC4Fnaau5P",
+      amount: order.amount,
+      currency: order.currency,
+      name: "Order Direct",
+      description: "Food Order",
+      order_id: order.id,
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+      handler: async function () {
 
-          body: JSON.stringify({
-            customer_name: name,
-            phone,
-            items: cart,
-            total_amount: total,
-            payment_status: "pending",
-            order_status: "received",
-            instructions
-          })
-        }
-      );
+        const res = await fetch(
+          "https://drc-production-c919.up.railway.app/api/order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
 
-      const data = await res.json();
+            body: JSON.stringify({
+              customer_name: name,
+              phone,
+              items: cart,
+              total_amount: total,
+              payment_status: "paid",
+              order_status: "received",
+              instructions,
+            }),
+          }
+        );
 
-      if (res.ok) {
-
-        const pointsEarned =
-          Math.floor(total / 10);
-
-        if (user) {
-
-          setUser({
-            ...user,
-            points:
-              (user.points || 0)
-              + pointsEarned
-          });
-
-        }
+        const data = await res.json();
 
         clearCart();
 
@@ -86,25 +90,24 @@ export default function Checkout() {
           state: {
             orderId: data.order_id,
             total,
-            name
-          }
+            name,
+          },
         });
+      },
 
-      }
+      theme: {
+        color: "#4B2E1E",
+      },
+    };
 
-    }
+    const rzp = new window.Razorpay(options);
+    rzp.open();
 
-    catch (err) {
-
-      console.log(err);
-
-      alert("Order failed");
-
-    }
-
-    setLoading(false);
-
-  };
+  } catch (error) {
+    console.log(error);
+    alert("Payment Failed");
+  }
+};
 
   return (
 
