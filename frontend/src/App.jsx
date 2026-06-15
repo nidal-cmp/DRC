@@ -15,6 +15,7 @@ import Favorites from "./pages/Favorites";
 import OrderHistory from "./pages/OrderHistory";
 import Success from "./pages/Success";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/admin";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/orders" element={<OrderHistory />} />
+        <Route path="/admin" element={<Admin />} />
 
         <Route path="*" element={<NotFound />} />
 

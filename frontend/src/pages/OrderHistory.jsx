@@ -1,81 +1,34 @@
+import { useEffect, useState } from "react";
+
 export default function OrderHistory() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch("https://drc-production-c919.up.railway.app/api/order")
+      .then((res) => res.json())
+      .then((data) => setOrders(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
-
     <div className="order-history-page">
+      <h1>Order History</h1>
 
-      <h1>
+      {orders.map((order) => (
+        <div className="order-card" key={order.id}>
+          <div className="order-top">
+            <h3>#{order.id}</h3>
 
-        Order History
+            <span className={`status ${order.order_status}`}>
+              {order.order_status}
+            </span>
+          </div>
 
-      </h1>
+          <p>{order.customer_name}</p>
 
-      <div className="order-card">
-
-        <div className="order-top">
-
-          <h3>
-
-            #1025
-
-          </h3>
-
-          <span className="status delivered">
-
-            Delivered
-
-          </span>
-
+          <h2>₹{order.total_amount}</h2>
         </div>
-
-        <p>
-
-          Chicken Biryani × 2
-
-        </p>
-
-        <h2>
-
-          ₹360
-
-        </h2>
-
-      </div>
-
-      <div className="order-card">
-
-        <div className="order-top">
-
-          <h3>
-
-            #1024
-
-          </h3>
-
-          <span className="status preparing">
-
-            Preparing
-
-          </span>
-
-        </div>
-
-        <p>
-
-          Paneer Butter Masala × 1
-
-        </p>
-
-        <h2>
-
-          ₹220
-
-        </h2>
-
-      </div>
-
+      ))}
     </div>
-
   );
-
 }
