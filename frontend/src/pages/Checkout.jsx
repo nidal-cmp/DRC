@@ -52,61 +52,88 @@ const placeOrder = async () => {
 
     const order = await orderRes.json();
 
-    const options = {
-      key: "rzp_test_SzrPUC4Fnaau5P",
-      amount: order.amount,
-      currency: order.currency,
-      name: "Order Direct",
-      description: "Food Order",
-      order_id: order.id,
+const options = {
+  key: "rzp_test_SzrPUC4Fnaau5P",
+  amount: order.amount,
+  currency: order.currency,
+  name: "Order Direct",
+  description: "Food Order",
+  order_id: order.id,
 
-      handler: async function () {
+  handler: async function (response) {
+    console.log("Payment Success:", response);
 
-        const res = await fetch(
-          "https://drc-production-c919.up.railway.app/api/order",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+    const res = await fetch(
+      "https://drc-production-c919.up.railway.app/api/order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name: name,
+          phone,
+          items: cart,
+          total_amount: total,
+          payment_status: "paid",
+          order_status: "received",
+          instructions,
+        }),
+      }
+    );
 
-            body: JSON.stringify({
-              customer_name: name,
-              phone,
-              items: cart,
-              total_amount: total,
-              payment_status: "paid",
-              order_status: "received",
-              instructions,
-            }),
-          }
-        );
+    const data = await res.json();
 
-        const data = await res.json();
+    clearCart();
 
-        clearCart();
-
-        navigate("/success", {
-          state: {
-            orderId: data.order_id,
-            total,
-            name,
-          },
-        });
+    navigate("/success", {
+      state: {
+        orderId: data.order_id,
+        total,
+        name,
       },
+    });
+  },
 
-      theme: {
-        color: "#4B2E1E",
-      },
-    };
+  modal: {
+    ondismiss: function () {
+      console.log("Payment popup closed");
+      alert("Payment popup closed");
+    },
+  },
 
-    const rzp = new window.Razorpay(options);
+  theme: {
+    color: "#4B2E1E",
+  },
+};
+
+console.log("Razorpay Order:", order);
+
+const rzp = new window.Razorpay(options);
+
+rzp.on("payment.failed", function (response) {
+  console.log("Payment Failed Details:", response);
+
+  alert(
+    "Payment Failed\n\n" +
+      JSON.stringify(response.error, null, 2)
+  );
+});
     rzp.open();
 
   } catch (error) {
-    console.log(error);
-    alert("Payment Failed");
-  }
+  console.error("Payment Error:", error);
+
+  alert(
+    JSON.stringify(
+      error?.message ||
+      error?.error ||
+      error,
+      null,
+      2
+    )
+  );
+}
 };
 
   return (
