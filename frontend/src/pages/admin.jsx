@@ -13,53 +13,114 @@ export default function Admin() {
   return (
   <div
     style={{
-      maxWidth: "900px",
-      margin: "0 auto",
-      padding: "20px",
-      textAlign: "center",
+      minHeight: "100vh",
+      backgroundColor: "#f7f3ee",
+      padding: "40px 20px",
     }}
   >
-    <button
-      onClick={() => {
-        localStorage.removeItem("adminAuth");
-        window.location.href = "/admin-login";
-      }}
+    {/* Header */}
+    <div
       style={{
-        marginBottom: "20px",
-        padding: "10px 20px",
-        cursor: "pointer",
+        maxWidth: "1200px",
+        margin: "0 auto 30px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
-      Logout
-    </button>
+      <h1
+        style={{
+          color: "#3b2412",
+          fontSize: "42px",
+          margin: 0,
+          fontWeight: "700",
+        }}
+      >
+        📋 Admin Dashboard
+      </h1>
 
-    <h1>📋 Orders Dashboard</h1>
+      <button
+        onClick={() => {
+          localStorage.removeItem("adminAuth");
+          window.location.href = "/admin-login";
+        }}
+        style={{
+          backgroundColor: "#4b2e19",
+          color: "white",
+          border: "none",
+          padding: "12px 24px",
+          borderRadius: "10px",
+          cursor: "pointer",
+          fontWeight: "600",
+        }}
+      >
+        Logout
+      </button>
+    </div>
 
-    {orders.length === 0 ? (
-      <p>No orders found.</p>
-    ) : (
-      orders.map((order) => (
-        <div
-          key={order.id}
+    {/* Orders */}
+    <div
+      style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+        gap: "20px",
+      }}
+    >
+      {orders.length === 0 ? (
+        <p
           style={{
-            border: "1px solid #ccc",
-            padding: "20px",
-            marginBottom: "15px",
-            borderRadius: "10px",
-            textAlign: "left",
-            background: "#fff",
+            textAlign: "center",
+            fontSize: "18px",
           }}
         >
-          <h3>Order #{order.id}</h3>
+          No orders found.
+        </p>
+      ) : (
+        orders.map((order) => (
+          <div
+            key={order.id}
+            style={{
+              background: "#fff",
+              borderRadius: "18px",
+              padding: "24px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+              transition: "0.3s",
+            }}
+          >
+            <h2
+              style={{
+                color: "#4b2e19",
+                marginBottom: "15px",
+              }}
+            >
+              Order #{order.id}
+            </h2>
 
-          <p><strong>Customer:</strong> {order.customer_name}</p>
-          <p><strong>Phone:</strong> {order.phone}</p>
-          <p><strong>Total:</strong> ₹{order.total_amount}</p>
-          <p><strong>Payment:</strong> {order.payment_status}</p>
-          <p><strong>Status:</strong> {order.order_status}</p>
-        </div>
-      ))
-    )}
+            <p>
+              <strong>Customer:</strong> {order.customer_name}
+            </p>
+
+            <p>
+              <strong>Phone:</strong> {order.phone}
+            </p>
+
+            <p>
+              <strong>Total:</strong> ₹{order.total_amount}
+            </p>
+
+            <p>
+              <strong>Payment:</strong> {order.payment_status}
+            </p>
+
+            <p>
+              <strong>Status:</strong> {order.order_status}
+            </p>
+          </div>
+        ))
+      )}
+    </div>
   </div>
 );
 }
