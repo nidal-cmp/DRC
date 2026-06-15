@@ -52,6 +52,16 @@ const placeOrder = async () => {
 
     const order = await orderRes.json();
 
+alert("Order ID: " + order.id);
+
+console.log("Create Order Response:", order);
+
+if (!order.id) {
+  alert("Order ID not received from Railway");
+  return;
+}
+
+
 const options = {
   key: "rzp_test_SzrPUC4Fnaau5P",
   amount: order.amount,
@@ -108,6 +118,13 @@ const options = {
 };
 
 console.log("Razorpay Order:", order);
+
+console.log("window.Razorpay =", window.Razorpay);
+
+if (!window.Razorpay) {
+  alert("Razorpay SDK failed to load");
+  return;
+}
 
 const rzp = new window.Razorpay(options);
 
