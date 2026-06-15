@@ -138,7 +138,11 @@ rzp.on("payment.failed", function (response) {
       JSON.stringify(response.error, null, 2)
   );
 });
-    rzp.open();
+   alert("About to open Razorpay");
+
+rzp.open();
+
+alert("After rzp.open()");
 
   } catch (error) {
   console.error("Payment Error:", error);
