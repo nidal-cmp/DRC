@@ -78,6 +78,22 @@ export default function Login() {
           Login
 
         </button>
+        <button
+  type="button"
+  onClick={() => navigate("/admin-login")}
+  style={{
+    width: "100%",
+    marginTop: "10px",
+    padding: "12px",
+    backgroundColor: "#666",
+    color: "white",
+    border: "none",
+    borderRadius: "10px",
+    cursor: "pointer",
+  }}
+>
+  Admin Login
+</button>
 
       </div>
 
