@@ -41,7 +41,7 @@ export default function Checkout() {
     try {
 
       const res = await fetch(
-        "https://drc.up.railway.app/api/order",
+        "https://drc-production-c919.up.railway.app/api/order",
         {
           method: "POST",
 
