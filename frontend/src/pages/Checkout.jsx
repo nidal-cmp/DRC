@@ -25,8 +25,9 @@ export default function Checkout() {
   const [instructions, setInstructions] =
     useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [paymentMethod, setPaymentMethod] = useState("online");
 
   const total = cart.reduce(
     (sum, item) =>
@@ -35,8 +36,60 @@ export default function Checkout() {
   );
 
 const placeOrder = async () => {
+  setLoading(true);
   try {
+    if (!name.trim()) {
+  alert("Please enter your name");
+  setLoading(false);
+  return;
+}
 
+if (!phone.trim()) {
+  alert("Please enter your phone number");
+  setLoading(false);
+  return;
+}
+    if (paymentMethod === "cod") {
+  try {
+    const res = await fetch(
+      "https://drc-production-c919.up.railway.app/api/order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name: name,
+          phone,
+          items: cart,
+          total_amount: total,
+          payment_status: "COD",
+          order_status: "received",
+          instructions,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    clearCart();
+
+    navigate("/success", {
+      state: {
+        orderId: data.order_id,
+        total,
+        name,
+      },
+    });
+
+    return;
+  } catch (error) {
+    console.error(error);
+    setLoading(false);
+    alert("Failed to place COD order");
+    return;
+  }
+}
     const orderRes = await fetch(
       "https://drc-production-c919.up.railway.app/api/create-order",
       {
@@ -52,12 +105,13 @@ const placeOrder = async () => {
 
     const order = await orderRes.json();
 
-alert("Order ID: " + order.id);
 
-console.log("Create Order Response:", order);
+
+
 
 if (!order.id) {
   alert("Order ID not received from Railway");
+  setLoading(false);
   return;
 }
 
@@ -85,7 +139,7 @@ const options = {
           phone,
           items: cart,
           total_amount: total,
-          payment_status: "paid",
+          payment_status: "Online",
           order_status: "received",
           instructions,
         }),
@@ -108,7 +162,6 @@ const options = {
   modal: {
     ondismiss: function () {
       console.log("Payment popup closed");
-      alert("Payment popup closed");
     },
   },
 
@@ -117,35 +170,33 @@ const options = {
   },
 };
 
-console.log("Razorpay Order:", order);
 
-console.log("window.Razorpay =", window.Razorpay);
 
 if (!window.Razorpay) {
   alert("Razorpay SDK failed to load");
+  setLoading(false);
   return;
 }
 
-alert("Razorpay object: " + typeof window.Razorpay);
+
 
 const rzp = new window.Razorpay(options);
 
 rzp.on("payment.failed", function (response) {
   console.log("Payment Failed Details:", response);
 
-  alert(
-    "Payment Failed\n\n" +
-      JSON.stringify(response.error, null, 2)
-  );
+  alert("Payment Failed. Please try again.");
 });
-   alert("About to open Razorpay");
+   
 
 rzp.open();
 
-alert("After rzp.open()");
+
 
   } catch (error) {
   console.error("Payment Error:", error);
+
+  setLoading(false);
 
   alert(
     JSON.stringify(
@@ -286,6 +337,33 @@ alert("After rzp.open()");
               </h2>
 
             </div>
+           <h3 style={{ marginTop: "20px" }}>
+  Payment Method
+</h3>
+
+<div style={{ marginBottom: "20px" }}>
+  <label>
+    <input
+      type="radio"
+      value="online"
+      checked={paymentMethod === "online"}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    Online Payment
+  </label>
+
+  <br /><br />
+
+  <label>
+    <input
+      type="radio"
+      value="cod"
+      checked={paymentMethod === "cod"}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    Cash On Delivery
+  </label>
+</div>
 
             <button
               className="checkout-btn"
