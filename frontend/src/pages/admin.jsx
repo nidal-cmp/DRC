@@ -12,6 +12,20 @@ export default function Admin() {
 
   return (
     <div style={{ padding: "20px" }}>
+      <button
+        onClick={() => {
+          localStorage.removeItem("adminAuth");
+          window.location.href = "/admin-login";
+        }}
+        style={{
+          marginBottom: "20px",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
+      >
+        Logout
+      </button>
+
       <h1>📋 Orders Dashboard</h1>
 
       {orders.length === 0 ? (
@@ -30,28 +44,23 @@ export default function Admin() {
             <h3>Order #{order.id}</h3>
 
             <p>
-              <strong>Customer:</strong>{" "}
-              {order.customer_name}
+              <strong>Customer:</strong> {order.customer_name}
             </p>
 
             <p>
-              <strong>Phone:</strong>{" "}
-              {order.phone}
+              <strong>Phone:</strong> {order.phone}
             </p>
 
             <p>
-              <strong>Total:</strong> ₹
-              {order.total_amount}
+              <strong>Total:</strong> ₹{order.total_amount}
             </p>
 
             <p>
-              <strong>Payment:</strong>{" "}
-              {order.payment_status}
+              <strong>Payment:</strong> {order.payment_status}
             </p>
 
             <p>
-              <strong>Status:</strong>{" "}
-              {order.order_status}
+              <strong>Status:</strong> {order.order_status}
             </p>
           </div>
         ))

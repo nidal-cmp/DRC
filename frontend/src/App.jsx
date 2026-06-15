@@ -16,6 +16,9 @@ import OrderHistory from "./pages/OrderHistory";
 import Success from "./pages/Success";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/admin";
+import AdminLogin from "./pages/AdminLogin";
+import AdminProtectedRoute from "./pages/AdminProtectedRoute";
+
 
 function App() {
 
@@ -38,7 +41,22 @@ function App() {
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/orders" element={<OrderHistory />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+  
+
+<Route
+  path="/admin"
+  element={
+    <AdminProtectedRoute>
+      <Admin />
+    </AdminProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin-login"
+  element={<AdminLogin />}
+/>
 
         <Route path="*" element={<NotFound />} />
 
