@@ -126,6 +126,8 @@ if (!window.Razorpay) {
   return;
 }
 
+alert("Razorpay object: " + typeof window.Razorpay);
+
 const rzp = new window.Razorpay(options);
 
 rzp.on("payment.failed", function (response) {
