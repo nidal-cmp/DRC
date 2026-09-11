@@ -52,7 +52,7 @@ if (!phone.trim()) {
     if (paymentMethod === "cod") {
   try {
     const res = await fetch(
-      "https://drc-production-c919.up.railway.app/api/order",
+      "https://drc-lpet.onrender.com/api/order",
       {
         method: "POST",
         headers: {
@@ -91,7 +91,7 @@ if (!phone.trim()) {
   }
 }
     const orderRes = await fetch(
-      "https://drc-production-c919.up.railway.app/api/create-order",
+      "https://drc-lpet.onrender.com/api/create-order",
       {
         method: "POST",
         headers: {
@@ -128,7 +128,7 @@ const options = {
     console.log("Payment Success:", response);
 
     const res = await fetch(
-      "https://drc-production-c919.up.railway.app/api/order",
+      "https://drc-lpet.onrender.com/api/order",
       {
         method: "POST",
         headers: {
